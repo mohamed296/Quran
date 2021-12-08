@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
-import 'package:t_shert/model/soura_data_model.dart';
 import 'package:t_shert/model/soura_model.dart';
 import 'package:t_shert/provider/state.dart';
 

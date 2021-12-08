@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:t_shert/model/soura_model.dart';
 
 class DetetheSoura extends StatelessWidget {
-  final List<String>? soura;
+  final List<SouraPage>? soura;
 
   int creindex = 1;
   DetetheSoura({
@@ -47,13 +48,14 @@ class DetetheSoura extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: PageView.builder(
-          itemCount: 5,
+          itemCount: soura!.length,
           itemBuilder: (context, index) {
             return Center(
               child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  children: soura!
+                  children: soura![index]
+                      .page!
                       .map((e) => TextSpan(
                             text: e + getVerseEndSymbol(creindex++),
                           ))
