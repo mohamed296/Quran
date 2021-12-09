@@ -51,18 +51,21 @@ class DetetheSoura extends StatelessWidget {
           itemCount: soura!.length,
           itemBuilder: (context, index) {
             return Center(
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  children: soura![index]
-                      .page!
-                      .map((e) => TextSpan(
-                            text: e + getVerseEndSymbol(creindex++),
-                          ))
-                      .toList(),
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
+              child: Padding(
+                padding: const EdgeInsets.all(0.0),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    children: soura![index]
+                        .page!
+                        .map((e) => TextSpan(
+                              text: e + getVerseEndSymbol(creindex++),
+                            ))
+                        .toList(),
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontFamily: "Arabic5"),
                   ),
                 ),
               ),
@@ -80,3 +83,5 @@ class DetetheSoura extends StatelessWidget {
 //             },
 //             itemCount: verse.length,
 //           )
+
+
