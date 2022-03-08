@@ -40,7 +40,7 @@ class DetetheSoura extends StatelessWidget {
 
     arabicNumeric += "\u06dd";
 
-    return arabicNumeric;
+    return "\u06dd";
   }
 
   @override
@@ -50,30 +50,44 @@ class DetetheSoura extends StatelessWidget {
         child: PageView.builder(
           itemCount: soura!.length,
           itemBuilder: (context, index) {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(0.0),
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    children: soura![index]
-                        .page!
-                        .map((e) => TextSpan(
-                              text: e + getVerseEndSymbol(creindex++),
-                            ))
-                        .toList(),
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 24,
-                        fontFamily: "Arabic5"),
-                  ),
-                ),
+            return Container(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height,
+              padding: const EdgeInsets.all(20.0),
+              child: Wrap(
+                children: [
+                  ...charSeparator(soura![index].page!)!
+                  // .map((e) => e.split(" "))
+                  // .toList()
+                  // .map((s) => s.map((e) => e.split(" ")))
+                  // .toList()
+                  // .map((e) => Text(
+                  //       e.toString() + "* ",
+                  //       overflow: TextOverflow.visible,
+                  //       style: const TextStyle(
+                  //           fontFamily: "Arabic7", fontSize: 24),
+                  //     ))
+                ],
               ),
             );
           },
         ),
       ),
     );
+  }
+
+  List<Text>? charSeparator(List<String>? soura) {
+    List<Text> list = [];
+    [
+      ...soura!
+          .map((a) => a.split(" ").map((ch) => ch.split(" ")))
+          .map((s) => [...s.map((c) => Text(c.toString() + "*"))])
+    ].forEach((element) {
+      element.forEach((e) {
+        list.add(e);
+      });
+    });
+    return list;
   }
 }
 // ListView.builder(
