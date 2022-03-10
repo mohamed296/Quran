@@ -50,23 +50,23 @@ class DetetheSoura extends StatelessWidget {
         child: PageView.builder(
           itemCount: soura!.length,
           itemBuilder: (context, index) {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(0.0),
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    children: soura![index]
-                        .page!
-                        .map((e) => TextSpan(
-                              text: e + getVerseEndSymbol(creindex++),
-                            ))
-                        .toList(),
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 24,
-                        fontFamily: "Arabic5"),
-                  ),
+            return Container(
+              margin: const EdgeInsets.all(20.0),
+              height: MediaQuery.of(context).size.height * 0.5,
+              alignment: Alignment.centerRight,
+              child: RichText(
+                textWidthBasis: TextWidthBasis.longestLine,
+                maxLines: 15,
+                textAlign: TextAlign.justify,
+                text: TextSpan(
+                  children: soura![index]
+                      .page!
+                      .map((e) => TextSpan(
+                            text: e + " *()* ",
+                          ))
+                      .toList(),
+                  style: const TextStyle(
+                      color: Colors.black, fontSize: 24, fontFamily: "Arabic2"),
                 ),
               ),
             );
