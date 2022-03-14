@@ -48,8 +48,8 @@ class Soura extends StatelessWidget {
                           ),
                           title: Text(
                             "${cubit!.soura[index].titleAr}",
-                            style:
-                                TextStyle(fontSize: 18, color: Colors.blueGrey),
+                            style: const TextStyle(
+                                fontSize: 18, color: Colors.blueGrey),
                           ),
                           subtitle: Text("${cubit.soura[index].count}"),
                         ),

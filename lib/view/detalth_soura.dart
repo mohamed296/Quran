@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t_shert/model/soura_model.dart';
 
 class DetetheSoura extends StatelessWidget {
-  final List<SouraPage>? soura;
+  List<SouraPage>? soura;
 
   int creindex = 1;
   DetetheSoura({
@@ -40,7 +40,7 @@ class DetetheSoura extends StatelessWidget {
 
     arabicNumeric += "\u06dd";
 
-    return "\u06dd";
+    return arabicNumeric;
   }
 
   @override
@@ -61,22 +61,22 @@ class DetetheSoura extends StatelessWidget {
     );
   }
 
-  List<String> charSeparator(List<String>? soura) {
-    List<String> list = [];
-    [
-      ...soura!.map((a) => a.split(" ").map((ch) => ch.split(" "))).map((s) => [
-            ...s.map(
-              (c) => c.toString().replaceAll("[", " ").replaceAll(']', ""),
-              // textAlign: TextAlign.,
-            )
-          ])
-    ].forEach((element) {
-      element.forEach((e) {
-        list.add(e);
-      });
-    });
-    return list;
-  }
+//   List<String> charSeparator(List<String>? soura) {
+//     List<String> list = [];
+//     [
+//       ...soura!.map((a) => a.split(" ").map((ch) => ch.split(" "))).map((s) => [
+//             ...s.map(
+//               (c) => c.toString().replaceAll("[", " ").replaceAll(']', ""),
+//               // textAlign: TextAlign.,
+//             )
+//           ])
+//     ].forEach((element) {
+//       element.forEach((e) {
+//         list.add(e);
+//       });
+//     });
+//     return list;
+//   }
 }
 // ListView.builder(
 //             scrollDirection: Axis.horizontal,
