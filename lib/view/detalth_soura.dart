@@ -40,7 +40,7 @@ class DetetheSoura extends StatelessWidget {
 
     arabicNumeric += "\u06dd";
 
-    return arabicNumeric;
+    return "\u06dd";
   }
 
   @override
@@ -48,32 +48,34 @@ class DetetheSoura extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: PageView.builder(
-          itemCount: soura!.length,
+          itemCount: 604,
           itemBuilder: (context, index) {
             return Container(
-              margin: const EdgeInsets.all(20.0),
-              height: MediaQuery.of(context).size.height * 0.5,
-              alignment: Alignment.centerRight,
-              child: RichText(
-                textWidthBasis: TextWidthBasis.longestLine,
-                maxLines: 15,
-                textAlign: TextAlign.justify,
-                text: TextSpan(
-                  children: soura![index]
-                      .page!
-                      .map((e) => TextSpan(
-                            text: e + " *()* ",
-                          ))
-                      .toList(),
-                  style: const TextStyle(
-                      color: Colors.black, fontSize: 24, fontFamily: "Arabic2"),
-                ),
-              ),
-            );
+                // width: double.infinity,
+                // height: MediaQuery.of(context).size.height,
+                padding: const EdgeInsets.all(0.0),
+                child: Image.asset("assets/quran-images/${index + 1}.png"));
           },
         ),
       ),
     );
+  }
+
+  List<String> charSeparator(List<String>? soura) {
+    List<String> list = [];
+    [
+      ...soura!.map((a) => a.split(" ").map((ch) => ch.split(" "))).map((s) => [
+            ...s.map(
+              (c) => c.toString().replaceAll("[", " ").replaceAll(']', ""),
+              // textAlign: TextAlign.,
+            )
+          ])
+    ].forEach((element) {
+      element.forEach((e) {
+        list.add(e);
+      });
+    });
+    return list;
   }
 }
 // ListView.builder(
@@ -85,3 +87,33 @@ class DetetheSoura extends StatelessWidget {
 //           )
 
 
+
+// Wrap(
+//                 children: [
+//                   ...charSeparator(soura![index].page!)!
+//                   // .map((e) => e.split(" "))
+//                   // .toList()
+//                   // .map((s) => s.map((e) => e.split(" ")))
+//                   // .toList()
+//                   // .map((e) => Text(
+//                   //       e.toString() + "* ",
+//                   //       overflow: TextOverflow.visible,
+//                   //       style: const TextStyle(
+//                   //           fontFamily: "Arabic7", fontSize: 24),
+//                   //     ))
+//                 ],
+//               ),
+
+
+//  RichText(
+//                 textAlign: TextAlign.justify,
+//                 text: TextSpan(
+//                   children: charSeparator(soura![index].page!)
+//                       .map((e) => TextSpan(
+//                             text: e + "    ",
+//                           ))
+//                       .toList(),
+//                   style: const TextStyle(
+//                       color: Colors.black, fontSize: 20, fontFamily: "Arabic4"),
+//                 ),
+//               ),
