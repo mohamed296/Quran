@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
+import 'package:t_shert/model/page_data.dart';
 import 'package:t_shert/model/soura_model.dart';
 import 'package:t_shert/provider/state.dart';
 
@@ -11,10 +12,24 @@ class AppCubit extends Cubit<AppState> {
   static AppCubit get(context) => BlocProvider.of(context);
 
   // Model? azkarModel;
+  Page? page;
   SouraModel? souraModel;
   void getAzkar() {
     emit(GetAzkerLoding());
-    rootBundle.loadString('jsonfile/soura.json').then((value) {
+    rootBundle.loadString('jsonfile/juz.json').then((value) {
+      final list = json.decode(value);
+
+      page = Page.fromjson(list);
+      emit(GetAzkerScasses());
+    }).catchError((e) {
+      log(e.toString());
+      emit(GetAzkerError(e.toString()));
+    });
+  }
+
+  void getsoura() {
+    emit(GetAzkerLoding());
+    rootBundle.loadString('jsonfile/soura_detals.json').then((value) {
       final list = json.decode(value);
 
       souraModel = SouraModel.fromjson(list);

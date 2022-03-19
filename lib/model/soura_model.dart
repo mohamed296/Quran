@@ -14,8 +14,8 @@ class SouraContant {
   String? title;
   String? index;
   String? titleAr;
-  String? pages;
-  List<SouraPage>? verse;
+  int? pages;
+
   SouraContant.fromjson(Map<String, dynamic> json) {
     place = json['place'];
     type = json['type'];
@@ -24,14 +24,5 @@ class SouraContant {
     index = json['index'];
     titleAr = json['titleAr'];
     pages = json['pages'];
-    verse =
-        List<SouraPage>.from(json["verse"].map((x) => SouraPage.fromjson(x)));
-  }
-}
-
-class SouraPage {
-  List<String>? page;
-  SouraPage.fromjson(Map<String, dynamic> json) {
-    page = List<String>.from(json["page"].map((x) => x));
   }
 }

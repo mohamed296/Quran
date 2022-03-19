@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:t_shert/model/soura_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_shert/provider/cubit.dart';
+import 'package:t_shert/provider/state.dart';
 
-class DetetheSoura extends StatelessWidget {
-  List<SouraPage>? soura;
-
-  int creindex = 1;
-  DetetheSoura({
+class DetetheSoura extends StatefulWidget {
+  final int? index;
+  const DetetheSoura({
+    this.index = 0,
     Key? key,
-    required this.soura,
   }) : super(key: key);
+
+  @override
+  State<DetetheSoura> createState() => _DetetheSouraState();
+}
+
+class _DetetheSouraState extends State<DetetheSoura> {
+  late int creindex;
 
   String getVerseEndSymbol(int verseNumber) {
     String arabicNumeric = " ";
@@ -38,45 +45,107 @@ class DetetheSoura extends StatelessWidget {
       }
     }
 
-    arabicNumeric += "\u06dd";
+    // arabicNumeric += "\u06dd";
 
-    return arabicNumeric;
+    return arabicNumeric.split("").reversed.join();
+  }
+
+  late PageController pageController;
+
+  // void onAddButtonTapped(int index) {
+  //   // use this to animate to the page
+  //   pageController.animateToPage(index,
+  //       duration: const Duration(milliseconds: 1000),
+  //       curve: Curves.linearToEaseOut);
+  //   // or this to jump to it without animating
+  //   pageController.jumpToPage(index);
+  // }
+  @override
+  void initState() {
+    creindex = widget.index!;
+    pageController = PageController(
+      initialPage: creindex,
+      keepPage: false,
+    );
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: PageView.builder(
-          itemCount: 604,
-          itemBuilder: (context, index) {
-            return Container(
-                // width: double.infinity,
-                // height: MediaQuery.of(context).size.height,
-                padding: const EdgeInsets.all(0.0),
-                child: Image.asset("assets/quran-images/${index + 1}.png"));
+      body: BlocProvider(
+        create: (context) => AppCubit()..getAzkar(),
+        child: BlocConsumer<AppCubit, AppState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            var cubit = AppCubit.get(context).page;
+            return state is GetAzkerLoding
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: PageView.builder(
+                        // onPageChanged: (pageNum) {
+                        //   creindex = pageNum;
+                        //   onAddButtonTapped(pageNum);
+                        // },
+                        controller: pageController,
+                        itemCount: cubit!.page.length + 1,
+                        itemBuilder: (context, index) {
+                          // creindex = creindex == 0 ? index : creindex;
+                          // index = creindex;
+                          return Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    cubit.page[index].name.toString(),
+                                    style:
+                                        const TextStyle(fontFamily: "Arabic6"),
+                                  ),
+                                  Text(
+                                    cubit.page[index].jza.toString(),
+                                    style:
+                                        const TextStyle(fontFamily: "Arabic6"),
+                                  )
+                                ],
+                              ),
+                              Container(
+                                  // width: double.infinity,
+                                  // height: MediaQuery.of(context).size.height,
+                                  padding: const EdgeInsets.all(0.0),
+                                  child: Image.asset(
+                                      "assets/quran-images/${index + 1}.png")),
+                              Center(
+                                child: Text(
+                                    getVerseEndSymbol(index + 1).toString(),
+                                    style: const TextStyle(
+                                        fontFamily: "Arabic6", fontSize: 18)),
+                              ),
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: Text(
+                                    "الحزب " +
+                                        getVerseEndSymbol(int.parse(
+                                            cubit.page[index].haz.toString())),
+                                    style: const TextStyle(
+                                        fontFamily: "Arabic6", fontSize: 16)),
+                              )
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  );
           },
         ),
       ),
     );
   }
-
-//   List<String> charSeparator(List<String>? soura) {
-//     List<String> list = [];
-//     [
-//       ...soura!.map((a) => a.split(" ").map((ch) => ch.split(" "))).map((s) => [
-//             ...s.map(
-//               (c) => c.toString().replaceAll("[", " ").replaceAll(']', ""),
-//               // textAlign: TextAlign.,
-//             )
-//           ])
-//     ].forEach((element) {
-//       element.forEach((e) {
-//         list.add(e);
-//       });
-//     });
-//     return list;
-//   }
 }
 // ListView.builder(
 //             scrollDirection: Axis.horizontal,

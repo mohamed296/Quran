@@ -10,7 +10,7 @@ class Soura extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => AppCubit()..getAzkar(),
+      create: (_) => AppCubit()..getsoura(),
       child: BlocConsumer<AppCubit, AppState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -38,7 +38,8 @@ class Soura extends StatelessWidget {
                                     Directionality(
                                         textDirection: TextDirection.rtl,
                                         child: DetetheSoura(
-                                            soura: cubit!.soura[index].verse)),
+                                          index: cubit!.soura[index].pages,
+                                        )),
                               ),
                             );
                           },
