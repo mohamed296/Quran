@@ -1,6 +1,6 @@
 {
     
-    "soura":[
+    "name":[
     {
         "place": "مكة",
         "type": "مكية",
@@ -1086,7 +1086,7 @@
         "title": "An-Nas",
         "titleAr":"الناس",
         "index": "114",
-        "pages": "569"
+        "pages": 603
     
     }
 ]}

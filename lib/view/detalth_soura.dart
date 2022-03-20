@@ -92,7 +92,7 @@ class _DetetheSouraState extends State<DetetheSoura> {
                         //   onAddButtonTapped(pageNum);
                         // },
                         controller: pageController,
-                        itemCount: cubit!.page.length + 1,
+                        itemCount: cubit!.page.length,
                         itemBuilder: (context, index) {
                           // creindex = creindex == 0 ? index : creindex;
                           // index = creindex;

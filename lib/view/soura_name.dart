@@ -38,7 +38,7 @@ class Soura extends StatelessWidget {
                                     Directionality(
                                         textDirection: TextDirection.rtl,
                                         child: DetetheSoura(
-                                          index: cubit!.soura[index].pages,
+                                          index: cubit!.name[index].pages,
                                         )),
                               ),
                             );
@@ -48,15 +48,15 @@ class Soura extends StatelessWidget {
                             child: Text("$index"),
                           ),
                           title: Text(
-                            "${cubit!.soura[index].titleAr}",
+                            "${cubit!.name[index].titleAr}",
                             style: const TextStyle(
                                 fontSize: 18, color: Colors.blueGrey),
                           ),
-                          subtitle: Text("${cubit.soura[index].count}"),
+                          subtitle: Text("${cubit.name[index].count}"),
                         ),
                       );
                     },
-                    itemCount: cubit!.soura.length),
+                    itemCount: cubit!.name.length),
           );
         },
       ),
